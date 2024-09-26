@@ -58,7 +58,7 @@ void loop() {
   Serial.println("Skickar POST");
 
   client.beginRequest();
-  client.post("/addtemp");
+  client.post("/post-dht11-sensor-data");
 
   client.sendHeader("Content-Type", "application/json");
   client.sendHeader("Content-Length", postData.length());
