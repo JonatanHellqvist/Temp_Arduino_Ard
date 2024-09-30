@@ -9,8 +9,10 @@ dht11 DHT11;
 char ssid[] = SECRET_SSID;
 char pass[] = SECRET_PASSWORD;
  
-char serverAdress[] = "192.168.1.238";
-int port = 8080;
+char serverAdress[] = "orca-app-il7tk.ondigitalocean.app";
+
+// 192.168.1.238
+int port = 443;
 
 //temp sensor////
 int sensePin = A0;
@@ -19,7 +21,7 @@ double temp;
 double voltage;
 /////////////////
 
-WiFiClient wifi;
+WiFiSSLClient wifi;
 HttpClient client = HttpClient(wifi, serverAdress, port);
 
 
@@ -44,10 +46,6 @@ void setup() {
 
 void loop() {
   int chk = DHT11.read(DHT11PIN);
-  // sensorInput = analogRead(sensePin);  // Läser från TMP36
-  // voltage = sensorInput * (4.0 / 1024.0);  // Konverterar till spänning
-  // temp = (voltage - 0.5) * 100.0;  // Konverterar spänning till temperatur i Celsius
-
   // // put your main code here, to run repeatedly:
   
   // String postData = "{\"celsius\":" + String(temp, 1) + "}"; //1 decimal
@@ -88,7 +86,9 @@ if (statusCode == 200) {
   Serial.print("Temperature  (C): ");
   Serial.println((float)DHT11.temperature, 1);
 
-  delay(1800000); //1timma
+  // delay(1800000); //30 min
+  delay(900000); //15min
+
 
   
 } else if (statusCode == -3) {
