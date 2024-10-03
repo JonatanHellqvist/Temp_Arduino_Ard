@@ -11,24 +11,20 @@ char pass[] = SECRET_PASSWORD;
  
 char serverAdress[] = "orca-app-il7tk.ondigitalocean.app";
 
-// 192.168.1.238
 int port = 443;
 
 //temp sensor////
-int sensePin = A0;
-int sensorInput;
-double temp;
-double voltage;
+// int sensePin = A0;
+// int sensorInput;
+// double temp;
+// double voltage;
 /////////////////
 
 WiFiSSLClient wifi;
 HttpClient client = HttpClient(wifi, serverAdress, port);
 
-
-
 void setup() {
   // put your setup code here, to run once:
-
   Serial.begin(9600);
 
   Serial.println("Ansluter till wifi");
@@ -41,7 +37,6 @@ void setup() {
   }
 
   Serial.println("Ansluten till WiFi");
-
 }
 
 void loop() {
@@ -69,34 +64,28 @@ void loop() {
   String response = client.responseBody();
 
   
-if (statusCode == 200) {
-  Serial.print("Status code: ");
-  Serial.println(statusCode);
-  Serial.print("Response: ");
-  Serial.println(response);
+  if (statusCode == 200) {
+    Serial.print("Status code: ");
+    Serial.println(statusCode);
+    Serial.print("Response: ");
+    Serial.println(response);
 
-  //avläsning
-   Serial.println();
+    Serial.println();
 
-  
+    Serial.print("Humidity (%): ");
+    Serial.println((float)DHT11.humidity, 1);
 
-  Serial.print("Humidity (%): ");
-  Serial.println((float)DHT11.humidity, 1);
+    Serial.print("Temperature  (C): ");
+    Serial.println((float)DHT11.temperature, 1);
 
-  Serial.print("Temperature  (C): ");
-  Serial.println((float)DHT11.temperature, 1);
-
-  // delay(1800000); //30 min
-  delay(900000); //15min
-
-
-  
-} else if (statusCode == -3) {
-  
-  Serial.print("Status code: ");
-  Serial.println(statusCode);
-  Serial.print("Response: ");
-  Serial.println(response);
-}
-
+    // delay(1800000); //30 min
+    delay(900000); //15min
+ 
+  } else if (statusCode == -3) {
+    
+    Serial.print("Status code: ");
+    Serial.println(statusCode);
+    Serial.print("Response: ");
+    Serial.println(response);
+  }
 }
