@@ -1,4 +1,4 @@
-# Temp_Arduino_be
+# Temp_Arduino_Ard
 Arduino C++ delen av projektet Temperatur/Luftfuktighets Tracker
 
 Projekt beskrivning:
